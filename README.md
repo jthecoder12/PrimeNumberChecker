@@ -4,7 +4,7 @@ A prime number checker written in C++.
 To compile:
 For desktop: <code>g++ main.cpp include/imgui/\*.cpp include/imgui/backends/\*.cpp -Iinclude -lglfw -lGL</code>
 You must have <code>libglfw-dev</code> and <code>libopengl-dev</code> installed.
-For web (requires emscripten): <code>em++ main.cpp include/imgui/\*.cpp include/imgui/backends/\*.cpp -Iinclude -s USE_GLFW=3 -s FULL_ES3 -o index.html</code>
+For web (requires emscripten): <code>em++ main.cpp include/imgui/\*.cpp include/imgui/backends/\*.cpp -Iinclude -s USE_GLFW=3 -s FULL_ES3 --preload-file Open_Sans -o index.html</code>
 
 **Credits:**
 [ImGui](https://github.com/ocornut/imgui)
