@@ -12,7 +12,9 @@
 GLFWwindow* window;
 int numberToCheck = 0;
 bool flag;
-bool resultMalloc = true;
+bool resultMalloc = false;
+bool reasonMalloc = false;
+bool notFirst = false;
 char* reason;
 char* result = "Results show up here";
 
@@ -28,10 +30,24 @@ void mainLoop() {
     ImGui::SetWindowPos(ImVec2(0, 0));
     ImGui::InputInt("Number to check", &numberToCheck);
     if(ImGui::Button("Check")) {
+        if(notFirst) {
+            if(reasonMalloc) {
+                free(reason);
+                reasonMalloc = false;
+            }
+            reason = "";
+            if(resultMalloc) {
+                free(result);
+                resultMalloc = false;
+            }
+            result = "";
+        }
+
         flag = false;
 
         for(int i=2; i<numberToCheck; i++) {
             if(numberToCheck % i == 0) {
+                reasonMalloc = true;
                 flag = true;
                 std::string reasonCPP = std::to_string(numberToCheck/i) + " * " + std::to_string(i) + " = " + std::to_string(numberToCheck);
                 reason = (char*)malloc(reasonCPP.length());
@@ -51,6 +67,8 @@ void mainLoop() {
             resultMalloc = false;
             result = "Number is prime";
         }
+
+        notFirst = true;
     }
     ImGui::Text(result);
 
@@ -123,7 +141,7 @@ int main() {
     EMSCRIPTEN_MAINLOOP_END;
 #endif
 
-    free(reason);
+    if(reasonMalloc) free(reason);
     if(resultMalloc) free(result);
 
     ImGui_ImplOpenGL3_Shutdown();
