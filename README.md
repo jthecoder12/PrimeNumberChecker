@@ -10,4 +10,6 @@ This program requires GLFW, OpenGL, and Dear ImGui
 <br>
 [Dear ImGui (licensed under MIT)](https://github.com/ocornut/imgui)
 <br>
+[Open Sans (licensed under the Open Font License)](https://fonts.google.com/specimen/Open+Sans)
+<br>
 GitHub Copilot
